@@ -100,10 +100,10 @@ study = StudyDefinition(
        pathogen="SARS-CoV-2",
        test_result="positive",
        find_first_match_in_period=True,
-       between=["2021-04-07", "2021-05-25"],
+       between=["2021-04-07", "2021-06-02"],
        returning="date",
        date_format="YYYY-MM-DD",
-       return_expectations={"date": {"earliest": "2021-04-07", "latest": "2021-05-25"},
+       return_expectations={"date": {"earliest": "2021-04-07", "latest": "2021-06-02"},
                             "incidence": 0.9
        },
     ), 
@@ -112,7 +112,7 @@ study = StudyDefinition(
        pathogen="SARS-CoV-2",
        test_result="positive",
        find_first_match_in_period=True,
-       between=["2021-04-07", "2021-05-25"],
+       between=["2021-04-07", "2021-06-02"],
        returning="s_gene_target_failure",
        return_expectations={
             "rate": "universal",
@@ -394,7 +394,7 @@ study = StudyDefinition(
         },
         return_expectations={"category": {"ratios": {"0": 0.8, "1": 0.1, "2": 0.1}},},
         recent_asthma_code=patients.with_these_clinical_events(
-            asthma_codes, between=["2017-02-01", "2021-04-07"],
+            asthma_codes, between=["2017-02-01", "sgss_pos_inrange"],
         ),
         asthma_code_ever=patients.with_these_clinical_events(asthma_codes),
         copd_code_ever=patients.with_these_clinical_events(
@@ -402,7 +402,7 @@ study = StudyDefinition(
         ),
         prednisolone_last_year=patients.with_these_medications(
             pred_codes,
-            between=["2020-04-07", "2021-04-07"],
+            between=["2020-04-07", "sgss_pos_inrange"],
             returning="number_of_matches_in_period",
         ),
     ),
