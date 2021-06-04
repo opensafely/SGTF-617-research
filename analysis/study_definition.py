@@ -140,6 +140,38 @@ study = StudyDefinition(
         return_expectations={"date": {"earliest": "2021-04-07"}, "incidence" : 0.2},
     ),
 
+    # AE ATTENDANCE
+    ae_admission_date=patients.attended_emergency_care(
+        returning= "date_arrived",
+        with_these_diagnoses=snomed_covid,
+        on_or_after="sgss_pos_inrange",
+        find_first_match_in_period=True,  
+        date_format="YYYY-MM-DD",  
+        return_expectations={"date": {"earliest": "2021-04-07"}, "incidence" : 0.5},
+    ),    
+
+    ae_destination=patients.attended_emergency_care(
+        returning= "discharge_destination",
+        with_these_diagnoses=snomed_covid,
+        on_or_after="sgss_pos_inrange",
+        find_first_match_in_period=True,  
+        return_expectations={
+            "rate": "universal",
+            "category": 
+                {"ratios": {
+                    "1": 0.1,
+                    "2": 0.1,
+                    "3": 0.1,
+                    "4": 0.1,
+                    "5": 0.1,
+                    "6": 0.1,
+                    "7": 0.2,
+                    "8": 0.2,
+                }
+            },
+        },
+    ),
+
     # ICU ADMISSION
     icu_admission_date=patients.admitted_to_icu(
         on_or_after="sgss_pos_inrange",
