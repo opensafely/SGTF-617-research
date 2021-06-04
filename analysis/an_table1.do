@@ -329,7 +329,7 @@ twoway kdensity ae_admission_date if start_week==1 || ///
 tab vacc end_ae_test, row
 bysort sgtf: tab vacc end_ae_test, row
 	
-tab ae_destination sgtf
+tab ae_dest sgtf
 
 	
 graph export ./output/ae_kden.svg, as(svg) replace
