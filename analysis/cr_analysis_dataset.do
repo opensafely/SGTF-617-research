@@ -146,7 +146,10 @@ foreach var of varlist 	dereg_date died_date_ons covid_tpp_probable covid_vacc_d
 		drop _tmp
 		format %d `var'
 }
- 
+
+
+tostring ae_destination, replace
+
  
 *******************************
 *  Recode implausible values  *
