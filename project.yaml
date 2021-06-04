@@ -11,3 +11,22 @@ actions:
       highly_sensitive:
         cohort: output/input.csv
 
+  crMAIN:
+    run: stata-mp:latest analysis/cr_analysis_dataset.do
+    needs: [generate_cohort]
+    outputs:
+      moderately_sensitive:
+        log: logs/cr_analysis_dataset.log
+      highly_sensitive:
+        data: output/cr_analysis_dataset.dta
+
+  anTAB1:
+    run: stata-mp:latest analysis/an_table1.do
+    needs: [crMAIN]
+    outputs:
+      moderately_sensitive:
+        log: logs/an_table1.log
+        table1text: output/table1.txt
+        table1xlsx: output/table1.xlsx
+        figure1: output/ae_hist.svg
+        figure2: output/ae_kden.svg
