@@ -148,7 +148,7 @@ foreach var of varlist 	dereg_date died_date_ons covid_tpp_probable covid_vacc_d
 }
 
 
-tostring ae_destination, replace
+tostring ae_destination, gen(ae_dest)
 
  
 *******************************
@@ -1069,7 +1069,7 @@ label var died							"1=Died; 0=Alive"
 label var died_pre_cens					"Died pre-ONS censor"
 
 label var ae_admission_date				"AE attendance date"
-label var ae_destination				"AE discharge destination"
+label var ae_dest						"AE discharge destination"
 label var end_ae_test					"Attended AE"
 
 label var vacc							"Vaccinated prior to positive test"
