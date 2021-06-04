@@ -148,7 +148,7 @@ foreach var of varlist 	dereg_date died_date_ons covid_tpp_probable covid_vacc_d
 }
 
 
-tostring ae_destination, gen(ae_dest)
+gen ae_dest = string(ae_destination,"%16.0g")
 
  
 *******************************
