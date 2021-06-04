@@ -204,8 +204,8 @@ file open tablecontent using ./output/table1.txt, write text replace
 file write tablecontent ("Table 1: Demographic and Clinical Characteristics") _n
 
 file write tablecontent _tab ("Total")		_tab ///
-							 ("non-VOC")	_tab ///
-							 ("VOC")		_n
+							 ("B.1.617")	_tab ///
+							 ("B.1.1.7")	_n
 							 
 
 
@@ -231,6 +231,14 @@ file write tablecontent _n
 
 *DIED PRE-CENS
 tabulatevariable, variable(died_pre_cens) min(0) max(1) 
+file write tablecontent _n
+
+*VACCINATED
+tabulatevariable, variable(vacc) min(0) max(1) 
+file write tablecontent _n
+
+*PREVIOUS INFECTION
+tabulatevariable, variable(prev_inf) min(0) max(1) 
 file write tablecontent _n
 
 *EPI WEEK
@@ -301,7 +309,7 @@ tab agegroup start_week if sgtf==1, col
 tab agegroup start_week if sgtf==0, col
 
 *AE ATTENDANCE
-histogram ae_admission_date, color(red%30)
+histogram ae_admission_date, freq color(red%30)
 graph export ./output/ae_hist.svg, as(svg) replace
 
 twoway kdensity ae_admission_date if start_week==1 || ///
@@ -310,8 +318,19 @@ twoway kdensity ae_admission_date if start_week==1 || ///
 	kdensity ae_admission_date if start_week==4 || ///
 	kdensity ae_admission_date if start_week==5 || ///
 	kdensity ae_admission_date if start_week==6 || ///
+	, legend(off) xlabel(,format(%td))
+	
+	/*
 	kdensity ae_admission_date if start_week==7 || ///
-	kdensity ae_admission_date if start_week==8, legend(off) xlabel(,format(%td))
+	kdensity ae_admission_date if start_week==8
+	*/
+	
+	
+tab vacc end_ae_test, row
+bysort sgtf: tab vacc end_ae_test, row
+	
+tab ae_destination sgtf
+
 	
 graph export ./output/ae_kden.svg, as(svg) replace
 

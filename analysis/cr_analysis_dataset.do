@@ -982,6 +982,11 @@ gen cox_time_d = stime_death-study_start if cox_death==1
 
 gen died = (died_date_ons < .)
 
+/* Vaccination and previous infection */
+gen vacc = (covid_vacc_date < sgss_pos_inrange)
+
+gen first_covid = min(covid_tpp_probable, first_pos_test_sgss)
+gen prev_inf = (first_covid < sgss_pos_inrange-7)
 
 /* AE attendance */
 *gen stime_ae_test = min(ae_admission_date, dereg_date, vacc_cens)
@@ -1063,6 +1068,10 @@ label var died_pre_cens					"Died pre-ONS censor"
 label var ae_admission_date				"AE attendance date"
 label var ae_destination				"AE discharge destination"
 label var end_ae_test					"Attended AE"
+
+label var vacc							"Vaccinated prior to positive test"
+label var first_covid					"First documented infection"
+label var prev_inf						"Covid infection prior to current"
 
 /*
 * Deaths before exclusions
