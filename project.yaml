@@ -28,5 +28,7 @@ actions:
         log: logs/an_table1.log
         table1text: output/table1.txt
         table1xlsx: output/table1.xlsx
-        figure1: output/ae_hist.svg
-        figure2: output/ae_kden.svg
+        figure1: output/alpha_ageband.svg
+        figure2: output/delta_ageband.svg
+        figure3: output/ae_hist.svg
+        figure4: output/ae_kden.svg

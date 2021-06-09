@@ -305,8 +305,61 @@ file close tablecontent
 
 
 *AGE BY EPI WEEK
-tab agegroup start_week if sgtf==1, col
-tab agegroup start_week if sgtf==0, col
+
+*ALPHA
+tab agegroup start_week if sgtf==1, matcell(alpha)
+
+matrix inv_alpha = alpha'
+svmat inv_alpha
+
+*CUMULATIVE
+gen cum_alpha1= inv_alpha1
+
+forvalues i= 2/8{
+local j= `i'-1
+gen cum_alpha`i'= cum_alpha`j' + inv_alpha`i'
+}
+
+*CONVERT TO %
+forvalues i= 1/8{
+gen perc_alpha`i'= (cum_alpha`i'/cum_alpha8)*100
+}
+
+gen age_plot = _n-1 in 1/8
+label values age_plot agegroupLab
+
+twoway (area perc_alpha8 perc_alpha7 perc_alpha6 perc_alpha5 perc_alpha4 perc_alpha3 perc_alpha2 perc_alpha1 age_plot, ///
+		graphregion(color(white)) yla(0(10)100) xla(0 "07APR" 1 "15APR" 2 "22APR" 3 "28APR" 4 "06MAY" 5 "13MAY" 6 "20MAY" 7 "27MAY") ///
+		ytitle("Proportion") xtitle("Study week") legend(off))
+
+graph export ./output/alpha_ageband.svg, as(svg) replace
+
+
+*DELTA
+tab agegroup start_week if sgtf==0, matcell(delta)
+
+matrix inv_delta = delta'
+svmat inv_delta
+
+*CUMULATIVE
+gen cum_delta1= inv_delta1
+
+forvalues i= 2/8{
+local j= `i'-1
+gen cum_delta`i'= cum_delta`j' + inv_delta`i'
+}
+
+*CONVERT TO %
+forvalues i= 1/8{
+gen perc_delta`i'= (cum_delta`i'/cum_delta8)*100
+}
+
+twoway (area perc_delta8 perc_delta7 perc_delta6 perc_delta5 perc_delta4 perc_delta3 perc_delta2 perc_delta1 age_plot, ///
+		graphregion(color(white)) yla(0(10)100) xla(0 "07APR" 1 "15APR" 2 "22APR" 3 "28APR" 4 "06MAY" 5 "13MAY" 6 "20MAY" 7 "27MAY") ///
+		ytitle("Proportion") xtitle("Study week") legend(off))
+		
+graph export ./output/delta_ageband.svg, as(svg) replace
+		
 
 *AE ATTENDANCE
 histogram ae_admission_date, freq color(red%30)
