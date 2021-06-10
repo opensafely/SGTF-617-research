@@ -359,7 +359,52 @@ twoway (area perc_delta8 perc_delta7 perc_delta6 perc_delta5 perc_delta4 perc_de
 		ytitle("Proportion") xtitle("Study week") legend(off))
 		
 graph export ./output/delta_ageband.svg, as(svg) replace
-		
+
+
+*CUMULATIVE CASES BY AGEGROUP
+gen case = 1
+
+sort sgtf agegroup study_start
+bysort sgtf agegroup (study_start) : gen cum_case = sum(case)
+
+*Delta
+line cum_case study_start if sgtf==0 & agegroup == 0 || ///
+	line cum_case study_start if sgtf==0 & agegroup == 1 || ///
+	line cum_case study_start if sgtf==0 & agegroup == 2 || ///
+	line cum_case study_start if sgtf==0 & agegroup == 3 || ///
+	line cum_case study_start if sgtf==0 & agegroup == 4 || ///
+	line cum_case study_start if sgtf==0 & agegroup == 5 || ///
+	line cum_case study_start if sgtf==0 & agegroup == 6 || ///
+	line cum_case study_start if sgtf==0 & agegroup == 7, ///
+	legend(off)
+	
+/*
+	legend(lab(1 "0-<18") lab(2 "18-<30") lab(3 "30-<40") lab(4 "40-<50") lab(5 "50-<60") ///
+			lab(6 "60-<70") lab(7 "70-<80") lab(8 "80+"))
+*/
+			
+graph export ./output/delta_cumcase.svg, as(svg) replace
+
+	
+*Alpha
+line cum_case study_start if sgtf==1 & agegroup == 0 || ///
+	line cum_case study_start if sgtf==1 & agegroup == 1 || ///
+	line cum_case study_start if sgtf==1 & agegroup == 2 || ///
+	line cum_case study_start if sgtf==1 & agegroup == 3 || ///
+	line cum_case study_start if sgtf==1 & agegroup == 4 || ///
+	line cum_case study_start if sgtf==1 & agegroup == 5 || ///
+	line cum_case study_start if sgtf==1 & agegroup == 6 || ///
+	line cum_case study_start if sgtf==1 & agegroup == 7, ///
+	legend(off)
+	
+/*
+	legend(lab(1 "0-<18") lab(2 "18-<30") lab(3 "30-<40") lab(4 "40-<50") lab(5 "50-<60") ///
+			lab(6 "60-<70") lab(7 "70-<80") lab(8 "80+"))
+*/
+
+graph export ./output/alpha_cumcase.svg, as(svg) replace
+
+
 
 *AE ATTENDANCE
 histogram ae_admission_date, freq color(red%30)
@@ -371,12 +416,9 @@ twoway kdensity ae_admission_date if start_week==1 || ///
 	kdensity ae_admission_date if start_week==4 || ///
 	kdensity ae_admission_date if start_week==5 || ///
 	kdensity ae_admission_date if start_week==6 || ///
-	, legend(off) xlabel(,format(%td))
-	
-	/*
 	kdensity ae_admission_date if start_week==7 || ///
-	kdensity ae_admission_date if start_week==8
-	*/
+	kdensity ae_admission_date if start_week==8 ///
+	, legend(off) xlabel(,format(%td))
 	
 	
 tab vacc end_ae_test, row
