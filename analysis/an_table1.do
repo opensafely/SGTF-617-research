@@ -242,7 +242,7 @@ tabulatevariable, variable(prev_inf) min(0) max(1)
 file write tablecontent _n
 
 *EPI WEEK
-tabulatevariable, variable(start_week) min(1) max(8) 
+tabulatevariable, variable(start_week) min(1) max(12) 
 file write tablecontent _n 
 
 *SEX
@@ -306,6 +306,7 @@ file close tablecontent
 
 *AGE BY EPI WEEK
 
+/*
 *ALPHA
 tab agegroup start_week if sgtf==1, matcell(alpha)
 
@@ -360,6 +361,7 @@ twoway (area perc_delta8 perc_delta7 perc_delta6 perc_delta5 perc_delta4 perc_de
 		
 graph export ./output/delta_ageband.svg, as(svg) replace
 
+*/
 
 *CUMULATIVE CASES BY AGEGROUP
 gen case = 1
@@ -417,7 +419,11 @@ twoway kdensity ae_admission_date if start_week==1 || ///
 	kdensity ae_admission_date if start_week==5 || ///
 	kdensity ae_admission_date if start_week==6 || ///
 	kdensity ae_admission_date if start_week==7 || ///
-	kdensity ae_admission_date if start_week==8 ///
+	kdensity ae_admission_date if start_week==8 || ///
+	kdensity ae_admission_date if start_week==9 || ///
+	kdensity ae_admission_date if start_week==10 || ///
+	kdensity ae_admission_date if start_week==11 || ///
+	kdensity ae_admission_date if start_week==12 ///
 	, legend(off) xlabel(,format(%td))
 	
 	

@@ -100,7 +100,7 @@ study = StudyDefinition(
        pathogen="SARS-CoV-2",
        test_result="positive",
        find_first_match_in_period=True,
-       between=["2021-04-07", "2021-06-02"],
+       between=["2021-04-07", "2021-07-02"],
        returning="date",
        date_format="YYYY-MM-DD",
        return_expectations={"date": {"earliest": "2021-04-07", "latest": "2021-06-02"},
@@ -112,7 +112,7 @@ study = StudyDefinition(
        pathogen="SARS-CoV-2",
        test_result="positive",
        find_first_match_in_period=True,
-       between=["2021-04-07", "2021-06-02"],
+       between=["2021-04-07", "2021-07-02"],
        returning="s_gene_target_failure",
        return_expectations={
             "rate": "universal",

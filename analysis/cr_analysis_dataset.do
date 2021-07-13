@@ -43,7 +43,7 @@ gen study_start = date(sgss_pos_inrange, "YMD")
 summ study_start
 noi disp "MINIMUM START DATE: " %td r(min)
 
-gen study_end = date("02june2021", "DMY")
+gen study_end = date("02july2021", "DMY")
 format %td study_start study_end
 
 * DROP IF NO POSITIVE PCR TEST IN SGSS DURING STUDY PERIOD
@@ -148,7 +148,7 @@ foreach var of varlist 	dereg_date died_date_ons covid_tpp_probable covid_vacc_d
 }
 
 
-gen ae_dest = string(ae_destination,"%16.0g")
+gen ae_dest = string(ae_destination,"%17.0g")
 
  
 *******************************
@@ -621,7 +621,11 @@ foreach var of varlist	chronic_respiratory_disease_date 	///
 *  Epidemiological week  *
 **************************
 
-gen start_week = 8 if study_start <= date("02jun2021", "DMY")
+gen start_week = 12 if study_start <= date("02jul2021", "DMY")
+replace start_week = 11 if study_start <= date("23jun2021", "DMY")
+replace start_week = 10 if study_start <= date("16jun2021", "DMY")
+replace start_week = 9 if study_start <= date("09may2021", "DMY")
+replace start_week = 8 if study_start <= date("02jun2021", "DMY")
 replace start_week = 7 if study_start <= date("26may2021", "DMY")
 replace start_week = 6 if study_start <= date("19may2021", "DMY")
 replace start_week = 5 if study_start <= date("12may2021", "DMY")
@@ -639,7 +643,12 @@ label define start_weekLab	1 "07Apr-14Apr" ///
 							5 "06May-12May" ///
 							6 "13May-19May" ///
 							7 "20May-26May" ///
-							8 "27May-02Jun"
+							8 "27May-02Jun" ///
+							9 "03Jun-09Jun" ///
+							10 "10Jun-16Jun" ///
+							11 "17Jun-23Jun" ///
+							12 "24Jun-02Jul"
+							
 							
 label values start_week start_weekLab
 
@@ -938,7 +947,7 @@ tab comorb_cat, m
 
 /*  28-day risk censoring dates  */
 noi di "REMEMBER TO UPDATE DATE OF ONS DATA UPLOAD"
-gen ons_data_date = date("10may2021", "DMY")
+gen ons_data_date = date("18jun2021", "DMY")
 gen ons_data_cens = ons_data_date-14			// Censor 14 days prior to ONS death data upload
 gen risk_28_days = study_start+28
 gen risk_40_days = study_start+40
