@@ -624,7 +624,7 @@ foreach var of varlist	chronic_respiratory_disease_date 	///
 gen start_week = 12 if study_start <= date("02jul2021", "DMY")
 replace start_week = 11 if study_start <= date("23jun2021", "DMY")
 replace start_week = 10 if study_start <= date("16jun2021", "DMY")
-replace start_week = 9 if study_start <= date("09may2021", "DMY")
+replace start_week = 9 if study_start <= date("09jun2021", "DMY")
 replace start_week = 8 if study_start <= date("02jun2021", "DMY")
 replace start_week = 7 if study_start <= date("26may2021", "DMY")
 replace start_week = 6 if study_start <= date("19may2021", "DMY")
