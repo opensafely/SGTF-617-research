@@ -1,15 +1,8 @@
 # S-gene target failure (SGTF) and case fatality risk (CFR)
 
-This is a study of the CFR of the SARS-CoV-2 variant of concern B.1.1.7 (VOC) compared to the non-VOC. SGTF is used as a proxy for identifying the VOC.
+This project is either no longer active or may be ongoing. Results in this repository MUST NOT be considered an accurate or valid representation of the study purpose. These data may reflect an incomplete or incorrect analysis with no further ongoing work. The repository content has ONLY been made public to support the OpenSAFELY open science and transparency principles and to support the sharing of re-usable code for other subsequent users. The results have not been peer-reviewed. No clinical, policy or safety conclusions must be drawn from any of the data here
 
-This is the code and configuration for our analysis
-
-* The paper is published in Eurosurveillance https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2021.26.11.2100256
-* Raw model outputs, including charts, crosstabs, etc, are in `released_outputs/`
-* If you are interested in how we defined our variables, take a look at the [study definition](analysis/study_definition.py); this is written in `python`, but non-programmers should be able to understand what is going on there
-* If you are interested in how we defined our code lists, look in the [codelists folder](./codelists/).
-* Developers and epidemiologists interested in the code should review
-[DEVELOPERS.md](./docs/DEVELOPERS.md).
+This is a study of the CFR of the SARS-CoV-2 variant of concern B.1.617.2 (Delta) compared to the B.1.1.7 (Alpha) variant. SGTF is used as a proxy for identifying the VOC.
 
 # About the OpenSAFELY framework
 
